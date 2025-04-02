@@ -6,6 +6,7 @@ use leptos_router::{
 };
 
 use crate::pages::index::HomePage;
+use crate::services::sylla::init_syllable_counter;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -33,6 +34,7 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
 pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
+    init_syllable_counter();
 
     view! {
         // injects a stylesheet into the document <head>

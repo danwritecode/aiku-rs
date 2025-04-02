@@ -5,15 +5,18 @@ use crate::components::view_haiku::ViewHaiku;
 #[component]
 pub fn HomePage() -> impl IntoView {
     let (haiku_url, set_haiku_url) = signal(Option::<String>::None);
+    let (bg_class, set_bg_class) = signal("bg-cover bg-center bg-no-repeat h-screen bg-[url('/assets/img/landing_background.png')]");
 
     Effect::new(move |_| {
-        if let Some(url) = haiku_url.get() {
-            println!("Haiku URL: {}", url);
+        if let Some(_) = haiku_url.get() {
+            set_bg_class.set("bg-cover bg-center bg-no-repeat h-screen bg-[url('/assets/img/result_background.png')]");
         }
     });
 
     view! {
-        <div class="bg-[url('/assets/img/landing_background.png')] bg-cover bg-center bg-no-repeat h-screen">
+        <div 
+            class=move || bg_class.get()
+        >
             <Show
                 when=move || haiku_url.get().is_some()
                 fallback=move || view! { 
